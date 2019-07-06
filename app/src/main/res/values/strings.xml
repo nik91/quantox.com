@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">The Movie App</string>
+    <string name="title_top_rated">Top rated</string>
+    <string name="title_most_popular">Most popular</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite_list_empty">Favorite list is empty. \\nPlease add Favorite Muvie/s.</string>
+</resources>
