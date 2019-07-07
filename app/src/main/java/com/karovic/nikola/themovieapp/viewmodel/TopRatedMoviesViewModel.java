@@ -1,9 +1,13 @@
 package com.karovic.nikola.themovieapp.viewmodel;
 
+import android.os.Build;
+
 import androidx.lifecycle.MutableLiveData;
 
+import com.karovic.nikola.themovieapp.BuildConfig;
 import com.karovic.nikola.themovieapp.model.Movie;
 import com.karovic.nikola.themovieapp.rest.api.MoviesAPI;
+import com.karovic.nikola.themovieapp.rest.response.MostPopularMoviesResult;
 
 import java.util.List;
 
@@ -34,7 +38,7 @@ public class TopRatedMoviesViewModel extends BaseViewModel {
 
     public void getTopRatedMovies(String language, int page) {
         state.postValue(ViewModelState.LOADING);
-        topRatedMoviesDisposable = moviesAPI.topRatedMovies(language, page )
+        topRatedMoviesDisposable = moviesAPI.topRatedMovies(language, page, BuildConfig.API_KEY)
                 .concatMap(Observable::just)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -42,8 +46,8 @@ public class TopRatedMoviesViewModel extends BaseViewModel {
 
     }
 
-    private void OnGetOrderSuccess(List<Movie> movies) {
-        movieMutableLiveData.setValue(movies);
+    private void OnGetOrderSuccess(MostPopularMoviesResult result) {
+        movieMutableLiveData.setValue(result.getResults());
         state.postValue(ViewModelState.SUCCESS);
     }
 

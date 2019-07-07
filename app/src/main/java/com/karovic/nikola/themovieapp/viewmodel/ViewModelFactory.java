@@ -14,20 +14,12 @@ public class ViewModelFactory implements Factory {
         this.context = context;
     }
 
-    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-
-        if (modelClass.isAssignableFrom(OrderHistoryViewModel.class)) {
-            return (T) new OrderHistoryViewModel();
+        if (modelClass.isAssignableFrom(TopRatedMoviesViewModel.class)) {
+            return (T) new TopRatedMoviesViewModel();
         }
-
-        if (modelClass.isAssignableFrom(OrderHistoryDetailsViewModel.class)) {
-            return (T) new OrderHistoryDetailsViewModel();
-        }
-
-
 
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

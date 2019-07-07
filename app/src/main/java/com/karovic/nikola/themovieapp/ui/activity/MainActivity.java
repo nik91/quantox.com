@@ -1,18 +1,17 @@
 package com.karovic.nikola.themovieapp.ui.activity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.karovic.nikola.themovieapp.R;
 import com.karovic.nikola.themovieapp.ui.fragment.FavoriteFragment;
 import com.karovic.nikola.themovieapp.ui.fragment.MostPopularFragment;
 import com.karovic.nikola.themovieapp.ui.fragment.TopRatedFragment;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
-
-import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;

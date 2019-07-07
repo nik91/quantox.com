@@ -3,10 +3,11 @@ package com.karovic.nikola.themovieapp.dagger.module;
 import android.app.Application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.grapesnberries.curllogger.CurlLoggerInterceptor;
 import com.karovic.nikola.themovieapp.BuildConfig;
-import com.karovic.nikola.themovieapp.data.LocalCache;
 import com.karovic.nikola.themovieapp.rest.HeaderInterceptor;
+import com.karovic.nikola.themovieapp.rest.api.MoviesAPI;
+import com.karovic.nikola.themovieapp.rest.auth.AuthManager;
+import com.karovic.nikola.themovieapp.rest.auth.TokenAuthenticator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +19,7 @@ import dagger.Provides;
 import dagger.Reusable;
 import okhttp3.Authenticator;
 import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -41,6 +43,7 @@ public class NetworkModule {
         return BuildConfig.IMAGES_URL + "/";
     }
 
+
     @Provides
     @Singleton
     Cache provideHttpCache(Application application) {
@@ -48,14 +51,17 @@ public class NetworkModule {
         return new Cache(application.getCacheDir(), cacheSize);
     }
 
-
-
     @Provides
     @Singleton
     HeaderInterceptor provideHeaderInterceptor() {
         return new HeaderInterceptor();
     }
 
+    @Provides
+    @Singleton
+    Authenticator provideAuthenticator() {
+        return new TokenAuthenticator();
+    }
 
 
     @Provides
@@ -70,30 +76,23 @@ public class NetworkModule {
         return logging;
     }
 
-    @Provides
-    @Singleton
-    CurlLoggerInterceptor provideCurlLoggerInterceptor() {
-        return new CurlLoggerInterceptor();
-    }
-
 
     @Provides
     @Singleton
     OkHttpClient provideOkhttpClient(Cache cache,
                                      HeaderInterceptor headerInterceptor,
-                                     HttpLoggingInterceptor loggingInterceptor,
-                                     CurlLoggerInterceptor curlInterceptor, Authenticator authenticator) {
+                                     HttpLoggingInterceptor loggingInterceptor) {
+        Interceptor headerInterceptors = new HttpLoggingInterceptor();
+
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.cache(cache)
                 .addInterceptor(loggingInterceptor)
-                .addInterceptor(headerInterceptor)
-                .authenticator(authenticator);
-//        if (BuildConfig.DEBUG) {
-//            client.addInterceptor(curlInterceptor);
-//        }
-        client.connectTimeout(60, TimeUnit.SECONDS);
-        client.readTimeout(60, TimeUnit.SECONDS);
-        client.writeTimeout(60, TimeUnit.SECONDS);
+                .addInterceptor(headerInterceptors)
+                .addInterceptor(headerInterceptor);
+//                .authenticator(authenticator);
+        client.connectTimeout(30, TimeUnit.SECONDS);
+        client.readTimeout(30, TimeUnit.SECONDS);
+        client.writeTimeout(30, TimeUnit.SECONDS);
         return client.build();
     }
 
@@ -102,7 +101,7 @@ public class NetworkModule {
     Retrofit provideRetrofit(@Named("apiUrl") String apiUrl, OkHttpClient okHttpClient) {
 
         return new Retrofit.Builder()
-                .addConverterFactory(ScalarsConverterFactory.create()) //This must be first to be able to get strings from request
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(JacksonConverterFactory.create(new ObjectMapper()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(apiUrl)
@@ -111,11 +110,11 @@ public class NetworkModule {
     }
 
 
-//    @Provides
-//    @Reusable
-//    AuthAPI provideAuthApi(Retrofit retrofit) {
-//        return retrofit.create(AuthAPI.class);
-//    }
+    @Provides
+    @Reusable
+    MoviesAPI provideMoviesAPI(Retrofit retrofit) {
+        return retrofit.create(MoviesAPI.class);
+    }
 //
 //    @Provides
 //    @Reusable

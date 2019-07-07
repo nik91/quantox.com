@@ -2,10 +2,9 @@ package com.karovic.nikola.themovieapp.dagger;
 
 import com.karovic.nikola.themovieapp.MainApplication;
 import com.karovic.nikola.themovieapp.dagger.component.AppComponent;
-import com.karovic.nikola.themovieapp.dagger.component.ViewModelComponent;
-
 import com.karovic.nikola.themovieapp.dagger.component.DaggerAppComponent;
 import com.karovic.nikola.themovieapp.dagger.component.DaggerViewModelComponent;
+import com.karovic.nikola.themovieapp.dagger.component.ViewModelComponent;
 import com.karovic.nikola.themovieapp.dagger.module.AppModule;
 import com.karovic.nikola.themovieapp.dagger.module.DataModule;
 import com.karovic.nikola.themovieapp.dagger.module.NetworkModule;

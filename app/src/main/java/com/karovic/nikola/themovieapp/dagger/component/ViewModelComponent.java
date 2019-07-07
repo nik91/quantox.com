@@ -4,8 +4,7 @@ import com.karovic.nikola.themovieapp.dagger.module.AppModule;
 import com.karovic.nikola.themovieapp.dagger.module.DataModule;
 import com.karovic.nikola.themovieapp.dagger.module.NetworkModule;
 import com.karovic.nikola.themovieapp.dagger.module.RoomModule;
-import com.karovic.nikola.themovieapp.viewmodel.BaseViewModel;
-
+import com.karovic.nikola.themovieapp.viewmodel.TopRatedMoviesViewModel;
 
 import javax.inject.Singleton;
 
@@ -26,8 +25,6 @@ public interface ViewModelComponent {
         Builder dataModule(DataModule dataModule);
     }
 
-    void inject(BaseViewModel baseViewModel);
-
-//    void inject(SavedCreditCardsViewModel savedCreditCardsViewModel);
+    void inject(TopRatedMoviesViewModel topRatedMoviesViewModel);
 
 }

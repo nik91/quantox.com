@@ -1,5 +1,7 @@
 package com.karovic.nikola.themovieapp.model;
 
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Entity
 public class Language {
     @PrimaryKey
+    @NonNull
     private String iso6391;
     private String englishName;
     private String name;

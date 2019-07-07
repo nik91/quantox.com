@@ -6,6 +6,7 @@ import com.karovic.nikola.themovieapp.dagger.module.AppModule;
 import com.karovic.nikola.themovieapp.dagger.module.DataModule;
 import com.karovic.nikola.themovieapp.dagger.module.NetworkModule;
 import com.karovic.nikola.themovieapp.dagger.module.RoomModule;
+import com.karovic.nikola.themovieapp.rest.auth.TokenAuthenticator;
 
 import javax.inject.Singleton;
 
@@ -23,10 +24,4 @@ import dagger.Component;
 public interface AppComponent {
     Application application();
 
-
-//    void inject(Language language);
-
-//    void inject(UserViewModel userViewModel);
-//
-//    void inject(CartViewModel cartViewModel);
 }

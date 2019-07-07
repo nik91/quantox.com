@@ -1,6 +1,7 @@
 package com.karovic.nikola.themovieapp.rest.api;
 
 import com.karovic.nikola.themovieapp.model.Movie;
+import com.karovic.nikola.themovieapp.rest.response.MostPopularMoviesResult;
 
 import java.util.List;
 
@@ -12,11 +13,13 @@ import retrofit2.http.Query;
 public interface MoviesAPI {
 
     @GET("top_rated")
-    Observable<List<Movie>> topRatedMovies(@Query("language") String language,
-                                          @Query("page") int page);
+    Observable<MostPopularMoviesResult> topRatedMovies(@Query("language") String language,
+                                           @Query("page") int page,
+                                           @Query("api_key") String apiKey);
 
     @GET("{movieId}/recommendations")
-    Observable<Movie> relatedMovies(@Path("") int movieId,
-                                    @Query("language") String language,
-                                    @Query("page") int page);
+    Observable<MostPopularMoviesResult> relatedMovies(@Path("") int movieId,
+                                                      @Query("language") String language,
+                                                      @Query("page") int page,
+                                                      @Query("api_key") String apiKey);
 }

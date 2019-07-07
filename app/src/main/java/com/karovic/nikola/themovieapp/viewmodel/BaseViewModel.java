@@ -4,12 +4,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.karovic.nikola.themovieapp.dagger.Injector;
+import com.karovic.nikola.themovieapp.dagger.component.AppComponent;
 import com.karovic.nikola.themovieapp.dagger.component.ViewModelComponent;
 
+
 public class BaseViewModel extends ViewModel {
-
+    private AppComponent appInjector = Injector.get();
     private ViewModelComponent injector = Injector.getVMComponent();
-
 
 
     public MutableLiveData<ViewModelState> state = new MutableLiveData<>();
@@ -20,13 +21,9 @@ public class BaseViewModel extends ViewModel {
     }
 
     private void inject() {
-        if (this instanceof OrderHistoryViewModel) {
-            injector.inject((OrderHistoryViewModel) this);
+        if (this instanceof TopRatedMoviesViewModel) {
+            injector.inject((TopRatedMoviesViewModel) this);
         }
-        if (this instanceof OrderHistoryDetailsViewModel) {
-            injector.inject((OrderHistoryDetailsViewModel) this);
-        }
-
 
     }
 

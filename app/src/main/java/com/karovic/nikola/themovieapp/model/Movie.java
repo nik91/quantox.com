@@ -1,11 +1,15 @@
 package com.karovic.nikola.themovieapp.model;
 
-import androidx.annotation.Nullable;
+
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.karovic.nikola.themovieapp.model.converter.MovieGenreConverter;
 
 import java.util.List;
 
@@ -20,13 +24,17 @@ public class Movie {
     private Double voteAverage;
     private String title;
     private Double popularity;
+    @JsonProperty("genre_ids")
+    @Ignore
+    private List<Integer> genreIds = null;
+    @JsonProperty("poster_path")
     private String posterPath;
     private String originalLanguage;
     private String originalTitle;
-    private List<Integer> genreIds = null;
     private String backdropPath;
     private Boolean adult;
     private String overview;
+    @JsonProperty("release_date")
     private String releaseDate;
     private boolean favorite;
 
@@ -102,13 +110,6 @@ public class Movie {
         this.originalTitle = originalTitle;
     }
 
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
-
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
 
     public String getBackdropPath() {
         return backdropPath;
@@ -148,5 +149,13 @@ public class Movie {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public List<Integer> getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
     }
 }

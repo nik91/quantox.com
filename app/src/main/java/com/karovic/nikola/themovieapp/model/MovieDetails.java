@@ -14,10 +14,7 @@ import java.util.List;
 public class MovieDetails {
     private Boolean adult;
     private String backdropPath;
-    private Object belongsToCollection;
     private Integer budget;
-    private List<Genre> genres = null;
-    private Object homepage;
     @PrimaryKey
     private Integer id;
     private String imdbId;
@@ -29,7 +26,6 @@ public class MovieDetails {
     private String releaseDate;
     private Integer revenue;
     private Integer runtime;
-    private List<Language> spokenLanguages = null;
     private String status;
     private String tagline;
     private String title;
@@ -53,13 +49,7 @@ public class MovieDetails {
         this.backdropPath = backdropPath;
     }
 
-    public Object getBelongsToCollection() {
-        return belongsToCollection;
-    }
 
-    public void setBelongsToCollection(Object belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
-    }
 
     public Integer getBudget() {
         return budget;
@@ -69,21 +59,7 @@ public class MovieDetails {
         this.budget = budget;
     }
 
-    public List<Genre> getGenres() {
-        return genres;
-    }
 
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
-    }
-
-    public Object getHomepage() {
-        return homepage;
-    }
-
-    public void setHomepage(Object homepage) {
-        this.homepage = homepage;
-    }
 
     public Integer getId() {
         return id;
@@ -163,14 +139,6 @@ public class MovieDetails {
 
     public void setRuntime(Integer runtime) {
         this.runtime = runtime;
-    }
-
-    public List<Language> getSpokenLanguages() {
-        return spokenLanguages;
-    }
-
-    public void setSpokenLanguages(List<Language> spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
     }
 
     public String getStatus() {

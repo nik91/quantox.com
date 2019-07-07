@@ -1,9 +1,5 @@
 package com.karovic.nikola.themovieapp.rest;
 
-
-import androidx.annotation.NonNull;
-
-
 import com.karovic.nikola.themovieapp.BuildConfig;
 
 import java.io.IOException;
@@ -14,7 +10,7 @@ import okhttp3.Response;
 
 public class HeaderInterceptor implements Interceptor {
 
-    public static final String HEADER_API_KEY = "api-key";
+    public static final String HEADER_API = "api_key";
 
     private static final String HEADER_ACCEPT = "Accept";
     private static final String HEADER_JSON = "application/json";
@@ -24,16 +20,14 @@ public class HeaderInterceptor implements Interceptor {
     }
 
     @Override
-    @NonNull
-    public Response intercept(@NonNull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
 
         Request.Builder requestBuilder = original.newBuilder()
                 .header(HEADER_ACCEPT, HEADER_JSON)
                 .method(original.method(), original.body());
 
-
-        requestBuilder.header(HEADER_API_KEY, BuildConfig.API_KEY);
+        requestBuilder.header(HEADER_API, BuildConfig.API_KEY);
 
         Request request = requestBuilder.build();
         return chain.proceed(request);

@@ -12,8 +12,8 @@ import com.karovic.nikola.themovieapp.model.Language;
 import com.karovic.nikola.themovieapp.model.Movie;
 import com.karovic.nikola.themovieapp.model.MovieDetails;
 
-@Database(entities = {Genre.class, Language.class, Movie.class, MovieDetails.class}, version = 1)
-public abstract class TheMovieAppDatabase extends RoomDatabase {
+@Database(entities = {Genre.class, Language.class, Movie.class, MovieDetails.class}, version = 2)
+public abstract class AppDatabase extends RoomDatabase {
 
     public abstract GenreDao genreDao();
 

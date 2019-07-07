@@ -20,6 +20,8 @@ import com.karovic.nikola.themovieapp.BuildConfig;
 import com.karovic.nikola.themovieapp.R;
 import com.karovic.nikola.themovieapp.model.Movie;
 
+import static com.karovic.nikola.themovieapp.utils.StringUtils.formatData;
+
 public class MovieListAdapter extends ListAdapter<Movie, MovieListAdapter.MovieListViewHolder> {
 
     private OnItemClickListener listener;
@@ -57,7 +59,7 @@ public class MovieListAdapter extends ListAdapter<Movie, MovieListAdapter.MovieL
 
         movieListViewHolder.movieTitle.setText(movie.getTitle());
 
-        movieListViewHolder.movieReleaseDate.setText(movie.getReleaseDate());
+        movieListViewHolder.movieReleaseDate.setText(formatData(movie.getReleaseDate()));
 
         movieListViewHolder.movieDescription.setText(movie.getOverview());
 
@@ -67,7 +69,7 @@ public class MovieListAdapter extends ListAdapter<Movie, MovieListAdapter.MovieL
                 .error(R.drawable.img_blank);
 
         Glide.with(mContext)
-                .load(BuildConfig.IMAGES_URL+ movie.getPosterPath())
+                .load(BuildConfig.IMAGES_URL + movie.getPosterPath())
                 .apply(options)
                 .into(movieListViewHolder.movieImage);
     }
